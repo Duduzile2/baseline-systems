@@ -1,423 +1,380 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Baseline Systems | Clean Digital Foundations</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
-  <link href="https://unpkg.com/phosphor-icons@1.4.2/src/css/phosphor.css" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-main: #05080f;
-      --bg-soft: #0a1220;
-      --card-bg: rgba(255,255,255,0.04);
-
-      --accent-main: #2ee6d6;
-      --accent-soft: #6ff3e8;
-      --accent-blue: #4fa3ff;
-
-      --text-main: #ffffff;
-      --text-muted: #b8c2d8;
-
-      --border: rgba(255,255,255,0.08);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background:
-        radial-gradient(circle at top, #0f1b33, var(--bg-main) 60%);
-      color: var(--text-main);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ---------- NAV ---------- */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(5,8,15,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav {
-      max-width: 1200px;
-      margin: auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      font-weight: 600;
-      letter-spacing: 0.4px;
-      margin-bottom: 0.5rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.6rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent-main);
-    }
-
-    /* ---------- HERO ---------- */
-    .hero {
-      max-width: 1200px;
-      margin: auto;
-      padding: 6rem 1.5rem 4rem;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.2rem);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      letter-spacing: -0.5px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, var(--accent-main), var(--accent-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin-bottom: 2rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-      justify-content: center;
-    }
-
-    /* ---------- BUTTONS ---------- */
-    .btn-primary, .btn-secondary {
-      padding: 0.6rem 1.2rem;
-      font-size: 0.9rem;
-      border-radius: 12px;
-      font-weight: 500;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      text-align: center;
-      display: block;
-      width: 100%;
-      max-width: 200px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-main), var(--accent-blue));
-      color: #fff;
-      box-shadow: 0 12px 35px rgba(46,230,214,0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 45px rgba(46,230,214,0.5);
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text-muted);
-    }
-
-    .btn-secondary:hover {
-      color: var(--accent-main);
-      border-color: var(--accent-main);
-    }
-
-    .hero-visual {
-      background:
-        linear-gradient(180deg, rgba(79,163,255,0.18), rgba(79,163,255,0.04)),
-        var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem;
-      margin-top: 1rem;
-    }
-
-    .hero-visual p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    /* ---------- SECTIONS ---------- */
-    section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 5rem 1.5rem;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    section > p {
-      color: var(--text-muted);
-      max-width: 720px;
-      margin-bottom: 2rem;
-    }
-
-    section ul, section ol {
-      margin-bottom: 2rem;
-      padding-left: 1.4rem;
-      color: var(--text-muted);
-    }
-
-    section ul li, section ol li {
-      margin-bottom: 0.8rem;
-    }
-
-    /* ---------- CARDS ---------- */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.6rem;
-    }
-
-    .card {
-      background:
-        linear-gradient(180deg, rgba(46,230,214,0.12), rgba(46,230,214,0.02)),
-        var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 2rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(46,230,214,0.45);
-    }
-
-    .card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    /* ---------- CTA SECTION ---------- */
-    #cta .hero-actions {
-      flex-direction: column;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-      align-items: center;
-    }
-
-    /* Contact form styling */
-    #cta form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-width: 500px;
-      background: var(--bg-soft);
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin-top: 1rem;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    #cta form input, #cta form textarea {
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--text-main);
-      font-family: 'Inter', sans-serif;
-    }
-
-    #cta form input::placeholder,
-    #cta form textarea::placeholder {
-      color: var(--text-muted);
-    }
-
-    #cta form button {
-      align-self: center;
-      padding: 0.7rem 1.4rem;
-      border-radius: 10px;
-      border: none;
-      background: linear-gradient(135deg, var(--accent-main), var(--accent-blue));
-      color: #fff;
-      font-weight: 500;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      max-width: 200px;
-      width: 100%;
-    }
-
-    #cta form button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(46,230,214,0.4);
-    }
-
-    /* ---------- FOOTER ---------- */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 1.5rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #9aa6c1;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .hero-visual {
-        margin-top: 2rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <div class="nav">
-    <div class="brand">Baseline Systems</div>
-    <nav class="nav-links">
-      <a href="#about">Who We Are</a>
-      <a href="#services">Services</a>
-      <a href="#cta">Get Started</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div>
-    <h1>Baseline Systems<br><span>Clean Digital Foundations. Better Flow.</span></h1>
-    <p>
-      We help students and small businesses design and set up reliable digital systems — email, cloud storage, websites, workflows, and simple automation — so everything works together efficiently.
-    </p>
-    <div class="hero-actions">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxuRCvnaqsS8Fhl4knmI7fayzK-wRa9u7OqUKrk9-Tjs-GRQ/viewform?usp=publish-editor" target="_blank" class="btn-primary">Book Your Digital Audit</a>
-      <a href="#contact-form" class="btn-secondary">Contact Us</a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <p>
-      Empowering students and small businesses with clean systems.<br>
-      Build your digital foundation with clarity and structure.
-    </p>
-  </div>
-</section>
-
-<section id="about">
-  <h2>Who We Are</h2>
-  <p>
-    At Baseline Systems, we believe that technology should make life simpler, not more complicated. Our mission is to help students and small businesses build clean, reliable digital systems that just work.
-  </p>
-  <p>
-    We focus on clarity, structure, and usability, providing practical solutions that scale with your needs. Whether it’s a student preparing for a career or a small business optimizing daily operations, we create systems that empower people to work smarter.
-  </p>
-  <ul>
-    <li>Stop wasting time on disorganized systems</li>
-    <li>Reduce stress caused by digital chaos</li>
-    <li>Build a foundation for growth and automation</li>
-  </ul>
-</section>
-
-<section id="services">
-  <h2>Services That Build Your Digital Foundation</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Digital Baseline Audit</h3>
-      <p>Identify gaps and inefficiencies in your current digital systems.<br>Receive a clear, actionable audit report.<br>Know exactly what needs improvement.</p>
-    </div>
-    <div class="card">
-      <h3>Foundation Setup — Students</h3>
-      <p>Professional email setup.<br>Cloud storage organization.<br>Portfolio website or GitHub profile optimization.<br>Digital CV and project integration.<br>Structured system to support academic and career growth.</p>
-    </div>
-    <div class="card">
-      <h3>Foundation Setup — Businesses</h3>
-      <p>Business email setup.<br>Google Business Profile creation.<br>Website setup or cleanup.<br>Cloud file structure and organization.<br>Workflow setup to save time and reduce errors.</p>
-    </div>
-    <div class="card">
-      <h3>Workflow & Integration</h3>
-      <p>Connect tools so they work together.<br>Automate forms, emails, and spreadsheets.<br>Appointment bookings and contact management.<br>Reduce repetitive tasks and human error.</p>
-    </div>
-    <div class="card">
-      <h3>Baseline Care — Ongoing Support</h3>
-      <p>Monthly check-ins and updates.<br>Troubleshooting and optimization.<br>Peace of mind knowing your systems remain organized.</p>
-    </div>
-  </div>
-</section>
-
-<section id="why">
-  <h2>Why Work With Us</h2>
-  <ul>
-    <li>Human-first approach: We design systems that are easy to use and understand</li>
-    <li>Future-ready: Foundations built today scale for tomorrow, including automation and AI integration</li>
-    <li>Trusted guidance: We focus on clarity and practicality, not unnecessary complexity</li>
-    <li>Accessible: Services for both students and small businesses</li>
-    <li>Flexible delivery: Remote or local support tailored to your needs</li>
-  </ul>
-
-</section>
-
-<section id="cta">
-  <h2>Ready to Build Your Digital Foundation?</h2>
-  <p>
-    Whether you’re a student looking to showcase your skills or a business aiming to simplify operations, we’ll help you build a system that works.
-  </p>
-  <div class="hero-actions">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxuRCvnaqsS8Fhl4knmI7fayzK-wRa9u7OqUKrk9-Tjs-GRQ/viewform?usp=publish-editor" target="_blank" class="btn-primary">Book Your Digital Audit</a>
-    <a href="#contact-form" class="btn-secondary">Contact Us</a>
-  </div>
-
-  <!-- Embedded Contact Form -->
-  <form id="contact-form" action="https://formspree.io/f/mykzqrvd" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
-
-<footer>
-  <p>Contact: <a href="mailto:info@baselinesystems.co.za">info@baselinesystems.co.za</a> | WhatsApp: [+27 71 320 7177]</p>
-  <p>Social: LinkedIn / Instagram / Facebook (optional)</p>
-  <p>© 2026 Baseline Systems. All rights reserved.</p>
-</footer>
-
-</body>
-</html>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8" />    <!-- Google Site Verification -->    <meta name="google-site-verification" content="1B_vpbWeGetcLAW7ogoQw2Kb6_NjuKac_AlTzXL-9UU" />    <!-- Allow Google to index and follow links -->    <meta name="robots" content="index, follow" />    <!-- Page Title -->    <title>Baseline Systems | Clean Digital Foundations</title>    <!-- Meta Description for SEO -->    <meta name="description" content="Baseline Systems helps students and small businesses design reliable digital systems — email, cloud storage, websites, workflows, and simple automation — so everything works together efficiently. Build your clean digital foundation today.">    <!-- Fonts -->    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">    <!-- Icons -->    <link href="https://unpkg.com/phosphor-icons@1.4.2/src/css/phosphor.css" rel="stylesheet">    <style>  
+    :root {  
+      --bg-main: #05080f;  
+      --bg-soft: #0a1220;  
+      --card-bg: rgba(255,255,255,0.04);  
+  
+      --accent-main: #2ee6d6;  
+      --accent-soft: #6ff3e8;  
+      --accent-blue: #4fa3ff;  
+  
+      --text-main: #ffffff;  
+      --text-muted: #b8c2d8;  
+  
+      --border: rgba(255,255,255,0.08);  
+    }  
+  
+    * {  
+      margin: 0;  
+      padding: 0;  
+      box-sizing: border-box;  
+    }  
+  
+    body {  
+      font-family: 'Inter', sans-serif;  
+      background: radial-gradient(circle at top, #0f1b33, var(--bg-main) 60%);  
+      color: var(--text-main);  
+      line-height: 1.6;  
+    }  
+  
+    a {  
+      color: inherit;  
+      text-decoration: none;  
+    }  
+  
+    header {  
+      position: sticky;  
+      top: 0;  
+      z-index: 100;  
+      background: rgba(5,8,15,0.85);  
+      backdrop-filter: blur(12px);  
+      border-bottom: 1px solid var(--border);  
+    }  
+  
+    .nav {  
+      max-width: 1200px;  
+      margin: auto;  
+      padding: 1rem 1.5rem;  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+      flex-wrap: wrap;  
+    }  
+  
+    .brand {  
+      font-weight: 600;  
+      letter-spacing: 0.4px;  
+      margin-bottom: 0.5rem;  
+    }  
+  
+    .nav-links {  
+      display: flex;  
+      gap: 1.6rem;  
+      font-size: 0.9rem;  
+      color: var(--text-muted);  
+      flex-wrap: wrap;  
+    }  
+  
+    .nav-links a:hover {  
+      color: var(--accent-main);  
+    }  
+  
+    .hero {  
+      max-width: 1200px;  
+      margin: auto;  
+      padding: 6rem 1.5rem 4rem;  
+      display: grid;  
+      grid-template-columns: 1.2fr 1fr;  
+      gap: 3rem;  
+      align-items: start;  
+    }  
+  
+    .hero h1 {  
+      font-size: clamp(2.4rem, 5vw, 3.2rem);  
+      line-height: 1.2;  
+      margin-bottom: 1rem;  
+      letter-spacing: -0.5px;  
+    }  
+  
+    .hero h1 span {  
+      background: linear-gradient(90deg, var(--accent-main), var(--accent-blue));  
+      -webkit-background-clip: text;  
+      -webkit-text-fill-color: transparent;  
+    }  
+  
+    .hero p {  
+      font-size: 1.05rem;  
+      color: var(--text-muted);  
+      max-width: 520px;  
+      margin-bottom: 2rem;  
+    }  
+  
+    .hero-actions {  
+      display: flex;  
+      gap: 1rem;  
+      flex-wrap: wrap;  
+      margin-bottom: 2rem;  
+      justify-content: center;  
+    }  
+  
+    .btn-primary, .btn-secondary {  
+      padding: 0.6rem 1.2rem;  
+      font-size: 0.9rem;  
+      border-radius: 12px;  
+      font-weight: 500;  
+      transition: transform 0.2s ease, box-shadow 0.2s ease;  
+      text-align: center;  
+      display: block;  
+      width: 100%;  
+      max-width: 200px;  
+    }  
+  
+    .btn-primary {  
+      background: linear-gradient(135deg, var(--accent-main), var(--accent-blue));  
+      color: #fff;  
+      box-shadow: 0 12px 35px rgba(46,230,214,0.3);  
+    }  
+  
+    .btn-primary:hover {  
+      transform: translateY(-2px);  
+      box-shadow: 0 18px 45px rgba(46,230,214,0.5);  
+    }  
+  
+    .btn-secondary {  
+      border: 1px solid var(--border);  
+      background: transparent;  
+      color: var(--text-muted);  
+    }  
+  
+    .btn-secondary:hover {  
+      color: var(--accent-main);  
+      border-color: var(--accent-main);  
+    }  
+  
+    .hero-visual {  
+      background:  
+        linear-gradient(180deg, rgba(79,163,255,0.18), rgba(79,163,255,0.04)),  
+        var(--bg-soft);  
+      border: 1px solid var(--border);  
+      border-radius: 20px;  
+      padding: 2.5rem;  
+      margin-top: 1rem;  
+    }  
+  
+    .hero-visual p {  
+      font-size: 0.95rem;  
+      color: var(--text-muted);  
+    }  
+  
+    section {  
+      max-width: 1200px;  
+      margin: auto;  
+      padding: 5rem 1.5rem;  
+    }  
+  
+    section h2 {  
+      font-size: 2rem;  
+      margin-bottom: 1rem;  
+    }  
+  
+    section > p {  
+      color: var(--text-muted);  
+      max-width: 720px;  
+      margin-bottom: 2rem;  
+    }  
+  
+    section ul, section ol {  
+      margin-bottom: 2rem;  
+      padding-left: 1.4rem;  
+      color: var(--text-muted);  
+    }  
+  
+    section ul li, section ol li {  
+      margin-bottom: 0.8rem;  
+    }  
+  
+    .grid {  
+      display: grid;  
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));  
+      gap: 1.6rem;  
+    }  
+  
+    .card {  
+      background:  
+        linear-gradient(180deg, rgba(46,230,214,0.12), rgba(46,230,214,0.02)),  
+        var(--card-bg);  
+      border: 1px solid var(--border);  
+      border-radius: 18px;  
+      padding: 2rem;  
+      transition: transform 0.2s ease, border-color 0.2s ease;  
+    }  
+  
+    .card:hover {  
+      transform: translateY(-5px);  
+      border-color: rgba(46,230,214,0.45);  
+    }  
+  
+    .card h3 {  
+      font-size: 1.1rem;  
+      margin-bottom: 0.8rem;  
+    }  
+  
+    .card p {  
+      font-size: 0.95rem;  
+      color: var(--text-muted);  
+      line-height: 1.4;  
+    }  
+  
+    #cta .hero-actions {  
+      flex-direction: column;  
+      gap: 0.8rem;  
+      margin-bottom: 1.5rem;  
+      align-items: center;  
+    }  
+  
+    #cta form {  
+      display: flex;  
+      flex-direction: column;  
+      gap: 1rem;  
+      max-width: 500px;  
+      background: var(--bg-soft);  
+      padding: 2rem;  
+      border-radius: 12px;  
+      border: 1px solid var(--border);  
+      margin: 1rem auto 0 auto;  
+    }  
+  
+    #cta form input, #cta form textarea {  
+      padding: 0.8rem 1rem;  
+      border-radius: 8px;  
+      border: 1px solid var(--border);  
+      background: rgba(255,255,255,0.03);  
+      color: var(--text-main);  
+      font-family: 'Inter', sans-serif;  
+    }  
+  
+    #cta form input::placeholder,  
+    #cta form textarea::placeholder {  
+      color: var(--text-muted);  
+    }  
+  
+    #cta form button {  
+      align-self: center;  
+      padding: 0.7rem 1.4rem;  
+      border-radius: 10px;  
+      border: none;  
+      background: linear-gradient(135deg, var(--accent-main), var(--accent-blue));  
+      color: #fff;  
+      font-weight: 500;  
+      cursor: pointer;  
+      transition: transform 0.2s ease, box-shadow 0.2s ease;  
+      max-width: 200px;  
+      width: 100%;  
+    }  
+  
+    #cta form button:hover {  
+      transform: translateY(-2px);  
+      box-shadow: 0 15px 40px rgba(46,230,214,0.4);  
+    }  
+  
+    footer {  
+      border-top: 1px solid var(--border);  
+      padding: 3rem 1.5rem;  
+      text-align: center;  
+      font-size: 0.85rem;  
+      color: #9aa6c1;  
+    }  
+  
+    @media (max-width: 900px) {  
+      .hero {  
+        grid-template-columns: 1fr;  
+      }  
+      .hero-visual {  
+        margin-top: 2rem;  
+      }  
+    }  
+  </style>  </head>  
+<body>  <header>  
+  <div class="nav">  
+    <div class="brand">Baseline Systems</div>  
+    <nav class="nav-links">  
+      <a href="#about">Who We Are</a>  
+      <a href="#services">Services</a>  
+      <a href="#cta">Get Started</a>  
+    </nav>  
+  </div>  
+</header>  <section class="hero">  
+  <div>  
+    <h1>Baseline Systems<br><span>Clean Digital Foundations. Better Flow.</span></h1>  
+    <p>  
+      We help students and small businesses design and set up reliable digital systems — email, cloud storage, websites, workflows, and simple automation — so everything works together efficiently.  
+    </p>  
+    <div class="hero-actions">  
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxuRCvnaqsS8Fhl4knmI7fayzK-wRa9u7OqUKrk9-Tjs-GRQ/viewform?usp=publish-editor" target="_blank" class="btn-primary">Book Your Digital Audit</a>  
+      <a href="#contact-form" class="btn-secondary">Contact Us</a>  
+    </div>  
+  </div>  
+  <div class="hero-visual">  
+    <img src="hero-image.jpg" alt="Students learning digital systems" />  
+    <p>  
+      Empowering students and small businesses with clean systems.<br>  
+      Build your digital foundation with clarity and structure.  
+    </p>  
+  </div>  
+</section>  <section id="about">  
+  <h2>Who We Are</h2>  
+  <p>  
+    At Baseline Systems, we believe that technology should make life simpler, not more complicated. Our mission is to help students and small businesses build clean, reliable digital systems that just work.  
+  </p>  
+  <p>  
+    We focus on clarity, structure, and usability, providing practical solutions that scale with your needs. Whether it’s a student preparing for a career or a small business optimizing daily operations, we create systems that empower people to work smarter.  
+  </p>  
+  <ul>  
+    <li>Stop wasting time on disorganized systems</li>  
+    <li>Reduce stress caused by digital chaos</li>  
+    <li>Build a foundation for growth and automation</li>  
+  </ul>  
+</section>  <section id="services">  
+  <h2>Services That Build Your Digital Foundation</h2>  
+  <div class="grid">  
+    <div class="card">  
+      <h3>Digital Baseline Audit</h3>  
+      <p>Identify gaps and inefficiencies in your current digital systems.<br>Receive a clear, actionable audit report.<br>Know exactly what needs improvement.</p>  
+    </div>  
+    <div class="card">  
+      <h3>Foundation Setup — Students</h3>  
+      <p>Professional email setup.<br>Cloud storage organization.<br>Portfolio website or GitHub profile optimization.<br>Digital CV and project integration.<br>Structured system to support academic and career growth.</p>  
+    </div>  
+    <div class="card">  
+      <h3>Foundation Setup — Businesses</h3>  
+      <p>Business email setup.<br>Google Business Profile creation.<br>Website setup or cleanup.<br>Cloud file structure and organization.<br>Workflow setup to save time and reduce errors.</p>  
+    </div>  
+    <div class="card">  
+      <h3>Workflow & Integration</h3>  
+      <p>Connect tools so they work together.<br>Automate forms, emails, and spreadsheets.<br>Appointment bookings and contact management.<br>Reduce repetitive tasks and human error.</p>  
+    </div>  
+    <div class="card">  
+      <h3>Baseline Care — Ongoing Support</h3>  
+      <p>Monthly check-ins and updates.<br>Troubleshooting and optimization.<br>Peace of mind knowing your systems remain organized.</p>  
+    </div>  
+  </div>  
+</section>  <section id="why">  
+  <h2>Why Work With Us</h2>  
+  <ul>  
+    <li>Human-first approach: We design systems that are easy to use and understand</li>  
+    <li>Future-ready: Foundations built today scale for tomorrow, including automation and AI integration</li>  
+    <li>Trusted guidance: We focus on clarity and practicality, not unnecessary complexity</li>  
+    <li>Accessible: Services for both students and small businesses</li>  
+    <li>Flexible delivery: Remote or local support tailored to your needs</li>  
+  </ul>  
+</section>  <section id="cta">  
+  <h2>Ready to Build Your Digital Foundation?</h2>  
+  <p>  
+    Whether you’re a student looking to showcase your skills or a business aiming to simplify operations, we’ll help you build a system that works.  
+  </p>  
+  <div class="hero-actions">  
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxuRCvnaqsS8Fhl4knmI7fayzK-wRa9u7OqUKrk9-Tjs-GRQ/viewform?usp=publish-editor" target="_blank" class="btn-primary">Book Your Digital Audit</a>  
+    <a href="#contact-form" class="btn-secondary">Contact Us</a>  
+  </div>    <!-- Embedded Contact Form -->    <form id="contact-form" action="https://formspree.io/f/mykzqrvd" method="POST">  
+    <input type="text" name="name" placeholder="Your Name" required>  
+    <input type="email" name="email" placeholder="Your Email" required>  
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>  
+    <button type="submit">Send Message</button>  
+  </form>  
+</section>  <footer>  
+  <p>Contact: <a href="mailto:info@baselinesystems.co.za">info@baselinesystems.co.za</a> | WhatsApp: [+27 71 320 7177]</p>  
+  <p>© 2026 Baseline Systems. All rights reserved.</p>  
+</footer>  </body>  
+</html>  please remove the imagine on the "student learning digital system" and provide full code
